@@ -1,12 +1,18 @@
 import React from 'react'
+import { useState } from 'react'
 import Sidebar from './components/layouts/Sidebar'
 import Header from './components/layouts/Header'
 
 const App = () => {
+  const [sideBarColapsed, setSideBarColapsed] = useState(false);
+  const [currentPage, setCurrentPage] = useState("dashboard");
+
   return (
     <div className='min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-slate-800 dark:to-slate-900 transition-all  duration-500'>
       <div className='flex h-screen overflow-hidden'>
-        <Sidebar/>
+        <Sidebar collapsed = {sideBarColapsed} onToglle ={()=> setSideBarColapsed(!sideBarColapsed)}
+          currentPage={currentPage}
+          onPageChange={setCurrentPage}/>
         <div className='flex-1 flex flex-col overflow-hidden'>
           <Header/>
         </div>

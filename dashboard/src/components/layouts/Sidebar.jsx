@@ -1,26 +1,89 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { BsWindowDesktop } from "react-icons/bs";
 
-const Sidebar = () => {
+const Sidebar = ({ collapsed = false, currentPage, onPageChange }) => {
+  const menuItems = [
+    {
+      id: "dashboard",
+      Icon : BsWindowDesktop,
+      label : "Dashboard",
+      active: true,
+      badge: "New",
+    },
+    {
+      id: "analytic",
+      Icon : BsWindowDesktop,
+      label : "Analytic",
+      subMenu : [
+        {id: "overview", label: "Overview"}
+      ]
+    },
+       {
+      id: "chat",
+      Icon : BsWindowDesktop,
+      label : "Chat",
+      badge: "New",
+    },
+  ];
+  const [expandedItems, setExpandedItems] = useState(new Set(["analytics"]));
+
+  const toggleExpanded = (itemid) => {
+    const newExpanded = new setExpandedItems(expandedItems)
+    if(expandedItems.has(itemid)){
+      newExpanded.delete(itemid)
+    }else{
+      newExpanded.add(itemid)
+    }
+
+    setExpandedItems(newExpanded)
+  };
+
   return (
-    <div className='transition duration-300 ease-in-out bg-white/80 dark:bg-slate-900/80 
-    backdrop-blur-xl border-r border-slate-200/50 dark:border-slate-700/50 flex flex-col relative z-10'>
+    <div className={`${collapsed ? "w-20" : "w-72"} transition duration-300 ease-in-out bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-r border-slate-200/50 dark:border-slate-700/50 flex flex-col relative z-10`}>
         {/* logo*/}
         <div className='p-6 border-b border-slate-200/50 dark:bg-slate-700/50'>
           <div className='flex items-center space-x-3'>
              <div className='w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg'>
                 <h2 className='font-bold text-2xl text-indigo-50'>A</h2>
              </div>
-
-              <div>
+             
+             {!collapsed && (
+                  <div>
                 <h1 className='text-xl font-bold text-slate-800'>A-Admin</h1>
                 <p className='text-xs text-slate-400 dark:text-salte-400'>Admin Panel</p>
               </div>
+             )}
+            
 
             </div>
 
         </div>
 
-        <nav className='flex-1 p-4 space-y-2 overflow-y-auto'></nav>
+        <nav className='flex-1 p-4 space-y-2 overflow-y-auto'>
+          {menuItems.map((item) => {
+            const Icon = item.Icon;
+            return (
+              <div key={item.id}>
+                <button className={`w-full flex items-center justify-between p-3 rounded-xl transition-all duration-200 ${currentPage === item.id || item.active ? "bg-gradient-to-br from-blue-500 to-purple-600 text-white shadow-lg shadow-blue/50"
+                   : ""}`} onClick={()=>{
+                    if(item.subMenu){
+                      toggleExpanded(item.id)
+                    } else{
+                      onPageChange(item.id)
+                    }
+                   }}>
+                  <div className='flex items-center space-x-3'>
+                    <Icon className={`w-5 h-5`} />
+                    <span className='text-sm font-medium'>{item.label}</span>
+                  </div>
+                  {item.badge && (
+                    <span className='text-xs px-2 py-1 rounded-md bg-blue-100 text-blue-700'>{item.badge}</span>
+                  )}
+                </button>
+              </div>
+            )
+          })}
+         </nav>
 
         <div className='p-4 border-t border-slate-200/50 dark:border-slate-700/50'>
            <div className='flex items-center space-x-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-800/50'>
@@ -37,6 +100,10 @@ const Sidebar = () => {
            
     </div>
   )
+
+
 }
 
-export default Sidebar
+
+
+export default Sidebar;

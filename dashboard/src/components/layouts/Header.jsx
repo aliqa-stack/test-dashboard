@@ -34,6 +34,16 @@ const Header = () => {
                 <button className='p-2.5 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800'>
                     <span>Dark</span>
                 </button>
+
+                <div className='sflex items-center space-x-3 pl-3 border-l border-slate-300 dark:border-slate-700'>
+                    <span className='w-5 h-5 rounded-full ring-2 ring-blue-500'>AL</span>
+                    <div className='hidden md:block'>
+                        <p className='text-sm font-medium text-slate-500 dark:text-slate-400'>
+                            Alik Al maliki
+                        </p>
+                        <p className='text-xs text-slate-500 dark:text-slate-400'>Admin</p>
+                    </div>
+                </div>
             </div>
         </div>
 

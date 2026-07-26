@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
-import { BsWindowDesktop } from "react-icons/bs";
+import { BsWindowDesktop} from "react-icons/bs";
+import { IoChatboxEllipses } from "react-icons/io5";
+import { FaChartBar } from "react-icons/fa";
 
 const Sidebar = ({ collapsed = false, currentPage, onPageChange }) => {
   const menuItems = [
@@ -7,12 +9,12 @@ const Sidebar = ({ collapsed = false, currentPage, onPageChange }) => {
       id: "dashboard",
       Icon : BsWindowDesktop,
       label : "Dashboard",
-      active: true,
+      active : true,
       badge: "New",
     },
     {
       id: "analytic",
-      Icon : BsWindowDesktop,
+      Icon : FaChartBar,
       label : "Analytic",
       subMenu : [
         {id: "overview", label: "Overview"}
@@ -20,7 +22,7 @@ const Sidebar = ({ collapsed = false, currentPage, onPageChange }) => {
     },
        {
       id: "chat",
-      Icon : BsWindowDesktop,
+      Icon : IoChatboxEllipses,
       label : "Chat",
       badge: "New",
     },
@@ -28,7 +30,7 @@ const Sidebar = ({ collapsed = false, currentPage, onPageChange }) => {
   const [expandedItems, setExpandedItems] = useState(new Set(["analytics"]));
 
   const toggleExpanded = (itemid) => {
-    const newExpanded = new setExpandedItems(expandedItems)
+    const newExpanded = new Set(expandedItems)
     if(expandedItems.has(itemid)){
       newExpanded.delete(itemid)
     }else{
@@ -65,10 +67,10 @@ const Sidebar = ({ collapsed = false, currentPage, onPageChange }) => {
             return (
               <div key={item.id}>
                 <button className={`w-full flex items-center justify-between p-3 rounded-xl transition-all duration-200 ${currentPage === item.id || item.active ? "bg-gradient-to-br from-blue-500 to-purple-600 text-white shadow-lg shadow-blue/50"
-                   : ""}`} onClick={()=>{
+                   : "text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/50"}`} onClick={()=>{
                     if(item.subMenu){
                       toggleExpanded(item.id)
-                    } else{
+                    }else {
                       onPageChange(item.id)
                     }
                    }}>
@@ -76,7 +78,7 @@ const Sidebar = ({ collapsed = false, currentPage, onPageChange }) => {
                     <Icon className={`w-5 h-5`} />
                     <span className='text-sm font-medium'>{item.label}</span>
                   </div>
-                  {item.badge && (
+                  {!collapsed && expandedItems.has(item.id) && (
                     <span className='text-xs px-2 py-1 rounded-md bg-blue-100 text-blue-700'>{item.badge}</span>
                   )}
                 </button>

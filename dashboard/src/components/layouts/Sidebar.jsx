@@ -18,7 +18,8 @@ const Sidebar = ({ collapsed = false, currentPage, onPageChange }) => {
       label : "Analytic",
       subMenu : [
         {id: "overview", label: "Overview"}
-      ]
+      ],
+      badge : "New"
     },
        {
       id: "chat",
@@ -76,12 +77,30 @@ const Sidebar = ({ collapsed = false, currentPage, onPageChange }) => {
                    }}>
                   <div className='flex items-center space-x-3'>
                     <Icon className={`w-5 h-5`} />
-                    <span className='text-sm font-medium'>{item.label}</span>
+                    <>
+                    {!collapsed && (
+                    <>
+                      <span className='ml-2 font-medium'>{item.label}</span>
+                    {item.badge && (
+                      <span className='px-2 py-1 text-xs'>{item.badge}</span>
+                      
+                    )}
+                    </>
+                    )}
+                  </>
                   </div>
-                  {!collapsed && expandedItems.has(item.id) && (
-                    <span className='text-xs px-2 py-1 rounded-md bg-blue-100 text-blue-700'>{item.badge}</span>
-                  )}
-                </button>
+                  </button>
+                  {!collapsed && item.subMenu && expandedItems.has(item.id) && (
+                  <div className='ml-8 mt-2 space-y-1'>
+                    {item.subMenu.map((subitem ) => {
+                      return(
+                          <button className='w-full text-left p-2 text-sm text=slate-600 dark:'>{subitem.label}</button>
+                      )
+
+                    })}
+ 
+                  </div>
+                 )}
               </div>
             )
           })}

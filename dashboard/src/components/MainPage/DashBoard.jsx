@@ -1,8 +1,10 @@
 import React from 'react'
+import StatsGrid from './StatsGrid'
 
 const DashBoard = () => {
   return (
-    <div>
+    <div className='space-y-6'>
+      <StatsGrid/>
     </div>
  
 

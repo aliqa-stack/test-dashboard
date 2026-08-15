@@ -3,6 +3,7 @@ import { useState } from 'react'
 import Sidebar from './components/layouts/Sidebar'
 import Header from './components/layouts/Header'
 import DashBoard from './components/MainPage/DashBoard'
+import StatsGrid from './components/MainPage/StatsGrid'
 
 const App = () => {
   const [sideBarColapsed, setSideBarColapsed] = useState(false);
@@ -18,6 +19,7 @@ const App = () => {
         <Sidebar collapsed={sideBarColapsed} currentPage={currentPage} onPageChange={setCurrentPage} />
         <div className='flex-1 flex flex-col overflow-hidden'>
           <Header onToglleSideBar={toggleSidebar} />
+        
           
           <main className='flex-1 overflow-y-auto bg-transparent'>
             <div className='p-6 space-y-6'>

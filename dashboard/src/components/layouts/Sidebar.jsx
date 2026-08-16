@@ -42,9 +42,9 @@ const Sidebar = ({ collapsed = false, currentPage, onPageChange }) => {
   };
 
   return (
-    <div className={`${collapsed ? "w-20" : "w-72"} transition duration-300 ease-in-out bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-r border-slate-200/50 dark:border-slate-700/50 flex flex-col relative z-10`}>
+  <div className={`${collapsed ? "w-20" : "w-70"} transition duration-300 ease-in-out bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-r border-slate-200/50 dark:border-slate-700/50 flex flex-col relative z-10`}>
         {/* logo*/}
-        <div className='p-6 border-b border-slate-200/50 dark:bg-slate-700/50'>
+        <div className='p-4 border-b border-slate-200/50 dark:bg-slate-700/50'>
           <div className='flex items-center space-x-3'>
              <div className='w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg'>
                 <h2 className='font-bold text-2xl text-indigo-50'>A</h2>
@@ -62,7 +62,7 @@ const Sidebar = ({ collapsed = false, currentPage, onPageChange }) => {
 
         </div>
 
-        <nav className='flex-1 p-4 space-y-2 overflow-y-auto'>
+        <nav className='flex-1 p-6 space-y-2 overflow-y-auto'>
           {menuItems.map((item) => {
             const Icon = item.Icon;
             return (

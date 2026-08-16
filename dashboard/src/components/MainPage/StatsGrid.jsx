@@ -41,7 +41,7 @@ const stats = [
 
 export const StatsGrid = () => {
   return (
-    <div className='grid grid-cols-1 md:grid-cols-2 m-4 xl:grid-cols-4 gap-4'>
+    <div className='grid grid-cols-1 md:grid-cols-2  xl:grid-cols-4 gap-4'>
       {stats.map((stats, index) =>{
 
         const RpIcon = stats.icon;

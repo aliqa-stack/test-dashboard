@@ -1,10 +1,12 @@
 import React from 'react'
 import StatsGrid from './StatsGrid'
+import ChartSection from './ChartSection'
 
 const DashBoard = () => {
   return (
     <div className='space-y-6'>
       <StatsGrid/>
+      <ChartSection/>
     </div>
  
 

@@ -6,9 +6,9 @@ import DashBoard from './components/MainPage/DashBoard'
 import Main from './UserI/Main'
 
 const App = () => {
-  // Replace this with the authenticated user returned by your backend.
+  // Replace s with the authenticated user returned by backend.
   const currentUser = {
-    permissions: [],
+    permissions: ['admin:dashboard'],
   };
   const hasAdminPermission = currentUser.permissions.includes('admin:dashboard');
   const [sideBarColapsed, setSideBarColapsed] = useState(false);
@@ -26,6 +26,9 @@ const App = () => {
     setCurrentPage(page);
   };
 
+  const goToMain = () => handlePageChange('home');
+
+
   if (currentPage === 'home') {
     return (
       <Main
@@ -40,7 +43,11 @@ const App = () => {
       <div className='flex h-screen overflow-hidden'>
         <Sidebar collapsed={sideBarColapsed} currentPage={currentPage} onPageChange={handlePageChange} />
         <div className='flex-1 flex flex-col overflow-hidden'>
-          <Header onToglleSideBar={toggleSidebar} />
+          <Header
+            onToglleSideBar={toggleSidebar}
+            goToMain={goToMain}
+            isBack={currentPage === 'dashboard'}
+          />
         
           
           <main className='flex-1 overflow-y-auto bg-transparent'>

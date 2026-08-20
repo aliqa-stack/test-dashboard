@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Header = ({ onToglleSideBar }) => {
+const Header = ({ onToglleSideBar, goToMain, isBack }) => {
   return (
     <div className='bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-b
      border-slate-200/50 dark:border-slate-700/50 px-6 py-4'>
@@ -44,7 +44,12 @@ const Header = ({ onToglleSideBar }) => {
                         <p className='text-sm font-medium text-slate-500 dark:text-slate-400'>
                             Alik Al maliki
                         </p>
-                        <p className='text-xs text-slate-500 dark:text-slate-400'>Admin</p>
+                        {isBack && (
+                            <button onClick={goToMain} className='text-xs font-medium text-blue-600 hover:text-blue-800'>
+                                Back to main page
+                            </button>
+
+                        )}
                     </div>
                 </div>
             </div>

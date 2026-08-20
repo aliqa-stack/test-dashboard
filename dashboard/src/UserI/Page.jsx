@@ -1,5 +1,9 @@
 import React from 'react'
+import { FiShoppingBag } from "react-icons/fi";
+import { FiArrowUpRight } from "react-icons/fi"
 
+
+//not finished still working on it
 const Page = () => {
 
     const type = [
@@ -16,20 +20,33 @@ const Page = () => {
         {type.map((index) =>(
                 <div key={index.id}>
                     <div className="row-span-3">
-                        <div className='bg-gray-500/80 w-62 h-70 rounded overflow-hidden  p-3 relative'>
-                        <div className='flex h-[75%]  bg-gray-400 justify-center items-center relative'>
-                        <div className='flex   items-center justify-center'>
-                            {index.name}
+                        <article className='group relative h-72 w-62 overflow-hidden rounded-2xl border border-white/70 bg-gradient-to-br from-blue-400 to-indigo-600 p-3 text-white shadow-lg shadow-blue-200/70 transition-all duration-200 hover:-translate-y-1 hover:shadow-xl hover:shadow-blue-300/70'>
+                            <div className='pointer-events-none absolute -right-8 -top-8 h-28 rounded-m  bg-white/15 transition-transform duration-300 group-hover:scale-125' />
+                            <div className='relative flex items-center justify-between'>
+                                <span className='flex h-9 w-9 items-center justify-center rounded-xl bg-white/20 shadow-inner shadow-white/20'>
+                                    <FiShoppingBag size={17} />
+                                </span>
+                                <span className='px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-blue-50'>
+                                    New
+                                </span>
                             </div>
-
-                        </div>
-                        <div className='mt-6  flex justify-between text-sm'>
-                            <div>
-
-                            {index.harga}
+                            <div className='relative flex h-44 items-center justify-center'>
+                                <div className='flex h-28 w-28 items-center justify-center  backdrop-blur-sm transition-transform duration-300 group-hover:scale-105'>
+                                    <span className='text-center text-lg font-bold capitalize tracking-wide text-white'>
+                                        {index.name}
+                                    </span>
+                                </div>
                             </div>
-                        </div>
-                        </div>
+                            <div className='relative flex items-end  justify-between rounded-xl border border-white/60 bg-white px-3 py-2.5 text-slate-900 shadow-sm'>
+                                <div>
+                                    <p className='text-[10px] font-medium uppercase tracking-wider text-slate-400'>Price</p>
+                                    <p className='text-lg font-bold leading-tight'>Rp {index.harga.toLocaleString('id-ID')}</p>
+                                </div>
+                                <span className='flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600 text-white transition-transform duration-200 group-hover:rotate-45'>
+                                    <FiArrowUpRight size={17} />
+                                </span>
+                            </div>
+                        </article>
                     </div>
                 </div>
             ))}

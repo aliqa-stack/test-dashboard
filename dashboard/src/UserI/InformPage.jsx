@@ -1,12 +1,17 @@
 import React from 'react'
+import CountUp from './countUp'
+
 
 const InformPage = () => {
     const Infor = [
         {head: "produk", total:100, test:"lorem ipsum"},
         {head: "brand", total:100, test:"lorem ipsum"},
         {head: "Vendor", total:100, test:"lorem ipsum"},
-        {head: "produk", total:100, test:"lorem ipsum dolor s"},
+        {head: "product", total:100, test:"lorem ipsum dolor s"},
     ]
+
+  
+
   return (
     <div>
         <section className='flex lg:justify-center justify-start'>
@@ -16,7 +21,7 @@ const InformPage = () => {
             <div className="row-span-2 grid h-32 items-center">
                 <div className=''>
                     <h2 className='font-bold text-md text-gray-600 font-inter'>{data.head}</h2>
-                    <span className='font-semibold text-6xl font-[Roboto]'>{data.total}</span>
+                    <CountUp  target={data.total} duration={2000}/>
                     <p className='font-sm text-gray-500 font-mono'>{data.test}</p> 
                 </div>
            </div>

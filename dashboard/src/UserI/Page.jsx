@@ -33,7 +33,7 @@ const Page = () => {
 
                 <div className='relative flex h-36 items-center justify-center'>
                     <div className='flex h-28 w-28 items-center justify-center backdrop-blur-sm transition-transform duration-300 group-hover:scale-105'>
-                        <span className='text-center text-xl font-bold text-black capitalize tracking-wide'>
+                        <span className='text-center text-xl font-bold text-black capitalize tracking-wide font-[Roboto]'>
                             {item.name}
                         </span>
                     </div>
@@ -41,9 +41,9 @@ const Page = () => {
 
                 <div className='relative flex items-end justify-between p-2 w-full border border-slate-200 bg-white text-slate-900 shadow-sm rounded-xl'>
                     <div>
-                        <p className='text-sm font-bold'>{item.brand}</p>
+                        <p className='text-sm font-bold font-[Roboto]'>{item.brand}</p>
                         <p className='text-[10px] font-medium uppercase tracking-wider text-slate-400'>Price</p>
-                        <p className='text-sm font-bold leading-tight'>Rp {item.harga.toLocaleString('id-ID')}</p>
+                        <p className='text-sm font-semibold leading-tight font-inter'>Rp {item.harga.toLocaleString('id-ID')}</p>
                     </div>
                     <span className='flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600 text-white transition-transform duration-200 group-hover:rotate-45'>
                         <FiArrowUpRight size={17} />

@@ -2,6 +2,7 @@ import React from 'react'
 import Page from './Page'
 import LandingPage from './LandingPage'
 import DividerSection from './DividerSection'
+import InformPage from './InformPage'
 
 const Main = ({ canAccessDashboard, onGoToDashboard }) => {
   return (
@@ -11,6 +12,8 @@ const Main = ({ canAccessDashboard, onGoToDashboard }) => {
           <p className='text-slate-600'>This is the user home page.</p>
         </div>
         <LandingPage/>
+        <DividerSection/>
+        <InformPage/>
         <DividerSection/>
         <Page/>
       {canAccessDashboard && (

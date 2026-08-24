@@ -13,6 +13,8 @@ import (
 	"github.com/joho/godotenv"
 )
 
+
+//streakk oiii lengit
 type RegisterRequest struct{
   Email string  `json:"email" bson:"email"`
   Username string `json:"username" bson:"username"`

@@ -9,4 +9,7 @@ type Product struct {
 	Barang string `json:"barang" bson:"barang"`
 	Brand string `json:"brand" bson:"brand"`
 	Harga int `json:"harga" bson:"harga"`
+	Deskripsi int `json:"deskripsi" bson:"deskripsi"`
 }
+
+var ProductSection *mongo.Collection

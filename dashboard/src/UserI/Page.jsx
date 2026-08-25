@@ -18,7 +18,7 @@ const Page = () => {
          {type.map((item) => (
             <article 
               key={item.id} 
-              className='group relative h-72 w-full max-w-[260px] overflow-hidden rounded-2xl border border-slate-400/70 bg-white p-3 text-white shadow-lg shadow-blue-200/70 transition-all duration-200 hover:-translate-y-1 hover:shadow-xl hover:shadow-blue-300/70'
+              className='group relative h-72 lg:h-80 w-full max-w-[260px] overflow-hidden rounded-2xl border border-slate-400/70 bg-white p-3 text-white shadow-lg shadow-blue-200/70 transition-all duration-200 hover:-translate-y-1 hover:shadow-xl hover:shadow-blue-300/70'
             >
                 <div className='pointer-events-none absolute -right-8 -top-8 h-28 bg-white/15 transition-transform duration-300 group-hover:scale-125' />
                 

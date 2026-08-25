@@ -1,9 +1,10 @@
 import React from 'react'
 import Page from './Page'
 import LandingPage from './LandingPage'
-import DividerSection from './DividerSection'
+import {DividerSection, DividerSection2} from './DividerSection'
 import InformPage from './InformPage'
 import GridSection from './GridSection'
+import IntroductionSection from './IntroductionSection'
 //import SecondDivider from './SecondDivider'
 
 const Main = ({ canAccessDashboard, onGoToDashboard }) => {
@@ -14,10 +15,11 @@ const Main = ({ canAccessDashboard, onGoToDashboard }) => {
           <p className='text-slate-600'>This is the user home page.</p>
         </div>
         <LandingPage/>
-        <DividerSection/>
+        <DividerSection2/>
         <InformPage/>
         <DividerSection/>
         <GridSection/>
+        <IntroductionSection/>
         <DividerSection/>
         <Page/>
       {canAccessDashboard && (

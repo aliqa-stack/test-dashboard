@@ -6,6 +6,7 @@ import (
 	"os"
 	"context"
 	"time"
+	"dashboard/Models"
 	"github.com/gofiber/fiber/v3"
 	"strings"
 	"go.mongodb.org/mongo-driver/v2/mongo"
@@ -24,6 +25,7 @@ type RegisterRequest struct{
 }
 
 var UserAuth *mongo.Collection
+
 func ConnectDb(){
 	err :=  godotenv.Load()
 	if err != nil {
@@ -38,6 +40,7 @@ func ConnectDb(){
 	}
 	 
 	UserAuth = clients.Database("dashboard").Collection("User")
+	ProductSection = clients.Database("dashboard").Collection("Product")
 }
 
 func main(){
@@ -114,5 +117,25 @@ func AuthComp(c fiber.Ctx) error{
 
 	
 	return c.Status(200).JSON(fiber.Map{"message" : "User login"})
+
+}
+
+func Productsec(c fiber.ctx) error {
+	ctx, cancel :=  context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
+	items := new(Product)
+
+	if err := c.Bind().Body(item); err != nil {
+		return c.Status(401).JSON(fiber.Map{"error" : "could'nt parse body"})
+	}
+
+	if strings.TrimSpace(item.Barang) == "" || strings.TrimSpace(item.Brand) == "" || strings.TrimSpace(item.Harga) == ""{
+		return c.Status(401).JSON(fiber.Map{"error" : "the list cannot be empty"})
+	}
+
+	_, err := Productsection.InsertOne(ctx, items)
+
+	return c.Status(200).JSON(items)
 
 }

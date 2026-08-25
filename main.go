@@ -9,6 +9,7 @@ import (
 	"github.com/gofiber/fiber/v3"
 	"strings"
 	"go.mongodb.org/mongo-driver/v2/mongo"
+	"go.mongodb.org/mongo-driver/v2/bson"
 	"go.mongodb.org/mongo-driver/v2/mongo/options"
 	"github.com/joho/godotenv"
 )
@@ -18,9 +19,10 @@ import (
 type RegisterRequest struct{
   Email string  `json:"email" bson:"email"`
   Username string `json:"username" bson:"username"`
-  Password string `json:"password" bson:"password"`
+  Password string `json:"-" bson:"password"`
 
 }
+
 var UserAuth *mongo.Collection
 func ConnectDb(){
 	err :=  godotenv.Load()
@@ -41,9 +43,11 @@ func ConnectDb(){
 func main(){
 	ConnectDb()
 	app := fiber.New()
-	//app.Get("/", UserInform)
+
 	app.Post("/auth", AuthUser)
 	app.Post("/comAuth", AuthComp)
+	app.Post("/product", Productsec)
+	app.Get("/product/:id", Getproduct)
 
 
 	log.Fatal(app.Listen(":3000"))
@@ -63,11 +67,18 @@ func AuthUser(c fiber.Ctx) error {
 		return c.Status(400).JSON(fiber.Map{"error": "email, username, and password are required"})
 	} 
 
+	hash, _ := hashed(User.Password)
+
 	Newuser := RegisterRequest{
 		Email: User.Email,
 		Username: User.Username,
-		Password: User.Password,
+		Password: hash,
     }
+
+	if len(Newuser.Username) < 8 || len(Newuser.Password) < 8 {
+		return c.Status(400).JSON(fiber.Map{"error" : "username or password to short"})
+	}
+
 
 	_, err := UserAuth.InsertOne(ctx, Newuser)
 
@@ -80,6 +91,9 @@ func AuthUser(c fiber.Ctx) error {
 }
 
 func AuthComp(c fiber.Ctx) error{
+	ctx, cancel :=  context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
 	User := new(RegisterRequest)
 
 	if err := c.Bind().Body(User); err != nil {
@@ -90,10 +104,15 @@ func AuthComp(c fiber.Ctx) error{
 		return c.Status(401).JSON(fiber.Map{"error" : "couldnt find the user", "data" : nil})
 	}
 
+
+
+	var Storeduser RegisterRequest
+	err := UserAuth.FindOne(ctx, bson.M{"email" : User.Email, "username" : User.Username}).Decode(&Storeduser)
+	if err != nil || !authHash(User.Password, Storeduser.Password) {
+		return c.Status(401).JSON(fiber.Map{"error" : "no user in db"})
+	}
+
 	
-
-
-
-	return c.JSON(fiber.Map{"message" : "User login"})
+	return c.Status(200).JSON(fiber.Map{"message" : "User login"})
 
 }

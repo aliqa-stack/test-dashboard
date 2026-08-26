@@ -17,6 +17,7 @@ import (
 
 
 //streakk oiii lengit
+//adding get and delete endpoint
 type RegisterRequest struct{
   Email string  `json:"email" bson:"email"`
   Username string `json:"username" bson:"username"`
@@ -51,6 +52,7 @@ func main(){
 	app.Post("/comAuth", AuthComp)
 	app.Post("/product", Productsec)
 	app.Get("/product/:id", Getproduct)
+	app.Delete("/product/:id", Deleteproduct)
 
 
 	log.Fatal(app.Listen(":3000"))
@@ -138,4 +140,36 @@ func Productsec(c fiber.ctx) error {
 
 	return c.Status(200).JSON(items)
 
+}
+
+func Getproduct(c fiber.Ctx) error {
+	ctx, cancel :=  context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
+	items := new(Product)
+
+	id, _ := ObjectId("id")
+	err := ProductSection.FindOne(ctx, Bson.M{"_id" : ID}).Decode(&items)
+	if err != nil {
+		return c.Status(404).JSON(fiber.Map{"error" : "couldn't find object"})
+	}
+
+	return c.Status(200).JSON(items)
+ 
+}
+
+func Deleteproduct(c fiber.Ctx) error {
+	ctx, cancel :=  context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
+	items := new(Product)
+
+	id, _ := ObjectId("id")
+	err := ProductSection.DeleteOne(ctx, Bson.M{"_id" : ID})
+	if err != nil {
+		return c.Status(404).JSON(fiber.Map{"error" : "couldn't find object"})
+	}
+
+	return c.Status(200).JSON(fiber.Map{"message" : "object deleted"})
+ 
 }

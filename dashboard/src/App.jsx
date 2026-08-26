@@ -3,6 +3,7 @@ import { useState } from 'react'
 import Sidebar from './components/layouts/Sidebar'
 import Header from './components/layouts/Header'
 import DashBoard from './components/MainPage/DashBoard'
+import AddSection from './components/MainPage/AddSection'
 import Main from './UserI/Main'
 
 const App = () => {
@@ -53,6 +54,7 @@ const App = () => {
           <main className='flex-1 overflow-y-auto bg-transparent'>
             <div className='p-6 space-y-6'>
               {currentPage === "dashboard" && <DashBoard />}
+              {currentPage === "Add" && <AddSection />}
 
             </div>
           </main>

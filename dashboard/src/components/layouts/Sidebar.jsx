@@ -22,9 +22,9 @@ const Sidebar = ({ collapsed = false, currentPage, onPageChange }) => {
       badge : "New"
     },
        {
-      id: "chat",
+      id: "Add",
       Icon : IoChatboxEllipses,
-      label : "Chat",
+      label : "Add",
       badge: "New",
     },
   ];

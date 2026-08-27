@@ -1,12 +1,12 @@
 package model 
 
 import (
-		"go.mongodb.org/mongo-driver/v2/bson/primitive"
+		"go.mongodb.org/mongo-driver/v2/bson"
 		"go.mongodb.org/mongo-driver/v2/mongo"
 )
 
 type Product struct {
-	ID primitive.ObjectID `bson:"_id, omiempty" json:"id"`
+	ID bson.ObjectID `bson:"_id, omiempty" json:"id"`
 	Barang string `json:"barang" bson:"barang"`
 	Brand string `json:"brand" bson:"brand"`
 	Harga int `json:"harga" bson:"harga"`

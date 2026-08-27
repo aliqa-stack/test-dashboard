@@ -1,8 +1,10 @@
 package main
 
 import(
-	
+	"crypto/rand"
+	"encoding/base64"
 	"golang.org/x/crypto/bcrypt"
+	"log"
 )
 
 func hashed(password string) (string, error) {
@@ -18,3 +20,10 @@ func authHash(password, hash string) bool {
 	return err == nil
 }
 
+func generateToken(length int) string {
+	bytes := make([]byte, length)
+	if _, err := rand.Read(bytes); err != nil {
+		log.Fatal("failed generate token %v", bytes)
+    }	
+	 return base64.URLEncoding.EncodeToString(bytes)
+}

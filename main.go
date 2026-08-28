@@ -1,7 +1,6 @@
 package main
 
 import (
-	_"fmt"
 	"log"
 	"os"
 	"context"
@@ -49,6 +48,10 @@ func ConnectDb(){
 func main(){
 	ConnectDb()
 	app := fiber.New()
+
+	app.Use(encryptcookie.New(encryptcookie.Config{
+		Key: os.Getenv("COOKIE_KEY"),
+	}))
 
 	app.Post("/auth", AuthUser)
 	app.Post("/comAuth", AuthComp)
@@ -120,18 +123,19 @@ func AuthComp(c fiber.Ctx) error{
 	}
 
 
-	sessionToken, err := generateToken(32)
-	if err != nil {
-		return c.Status(401).JSON(fiber.Map{"error" : "cant generate token"})
-	} 
+	sessionToken := generateToken(32)
+
 	c.Cookie(&fiber.Cookie{
 		Name:"sessiontoken",
 		Value: sessionToken,
-
+		Expires : time.Now().Add(24 * time.Hour),
+		HTTPOnly : true,
+		Secure: true,
+		SameSite : "lex",
 	})
 
 
-	 err = model.UserAuth.UpdateOne(ctx, bson.M{"email" : Storeduser.Email}bson.M{"$set" : sessionToken})
+	 _, err = UserAuth.UpdateOne(ctx, bson.M{"email" : Storeduser.Email}, bson.M{"$set" : bson.M{"sessiontoken" : sessionToken}})
 	 if err != nil {
 		return c.Status(401).JSON(fiber.Map{"error" : "session error"})
 	 }
@@ -147,20 +151,18 @@ func Productsec(c fiber.Ctx) error {
 
 	items := new(model.Product)
 
-	if err := c.Bind().Body(items); err != nil {
+	if Producterr := c.Bind().Body(items); Producterr != nil {
 		return c.Status(401).JSON(fiber.Map{"error" : "could'nt parse body"})
 	}
 
-	num, err := strconv.Atoi(items.Harga)
-	if err != nil {
-		return c.Status(401).JSON(fiber.Map{"error" : "cannot be empty"})
-		 
+	if items.Harga <= 0 {
+		return c.Status(400).JSON(fiber.Map{"error": "harga must be greater than zero"})
 	}
-	if strings.TrimSpace(items.Barang) == "" || strings.TrimSpace(items.Brand) == "" || strings.TrimSpace(items.Harga) == ""{
+	if strings.TrimSpace(items.Barang) == "" || strings.TrimSpace(items.Brand) == ""{
 		return c.Status(401).JSON(fiber.Map{"error" : "the list cannot be empty"})
 	}
 
-	_ , err := model.ProductSection.InsertOne(ctx, items)
+	_, err := model.ProductSection.InsertOne(ctx, items)
 	if err != nil {
 		return c.Status(401).JSON(fiber.Map{"error" : "failed adding items"})
 	}
@@ -175,8 +177,8 @@ func Getproduct(c fiber.Ctx) error {
 
 	items := new(model.Product)
 
-	id, _ := bson.NewObjectID(c.Params("id"))
-	_, err := model.ProductSection.FindOne(ctx, bson.M{"_id" : id}).Decode(&items)
+	id, _ := bson.ObjectIDFromHex(c.Params("id"))
+	err := model.ProductSection.FindOne(ctx, bson.M{"_id" : id}).Decode(&items)
 	if err != nil {
 		return c.Status(404).JSON(fiber.Map{"error" : "couldn't find object"})
 	}
@@ -189,7 +191,7 @@ func Deleteproduct(c fiber.Ctx) error {
 	ctx, cancel :=  context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
-	id, _ := bson.NewObjectID(c.Params("id"))
+	id, _ := bson.ObjectIDFromHex(c.Params("id"))
 	_, err := model.ProductSection.DeleteOne(ctx, bson.M{"_id" : id})
 	if err != nil {
 		return c.Status(404).JSON(fiber.Map{"error" : "couldn't find object"})

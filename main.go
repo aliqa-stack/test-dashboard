@@ -5,9 +5,10 @@ import (
 	"os"
 	"context"
 	"time"
+	"fmt"
 	model "dashboard/Models"
 	"github.com/gofiber/fiber/v3"
-	"github.com/gofiber/fiber/v3/middleware/encryptcookie"
+	_"github.com/gofiber/fiber/v3/middleware/encryptcookie"
 	"strings"
 	"go.mongodb.org/mongo-driver/v2/mongo"
 	"go.mongodb.org/mongo-driver/v2/bson"
@@ -18,6 +19,7 @@ import (
 
 //streakk oiii lengit
 //adding get and delete endpoint
+
 type RegisterRequest struct{
   Email string  `json:"email" bson:"email"`
   Username string `json:"username" bson:"username"`
@@ -33,7 +35,7 @@ func ConnectDb(){
 	if err != nil {
 		log.Fatal("error opening env files")
 	}
-
+	
 	MONGGO_URI := os.Getenv("MONGODB_URI")
 	opts := options.Client().ApplyURI(MONGGO_URI)
 	clients, err := mongo.Connect(opts)
@@ -48,10 +50,12 @@ func ConnectDb(){
 func main(){
 	ConnectDb()
 	app := fiber.New()
+	fmt.Printf(generateToken(32))
 
-	app.Use(encryptcookie.New(encryptcookie.Config{
+	//adding cookie 
+    app.Use(encryptcookie.New(encryptcookie.Config{
 		Key: os.Getenv("COOKIE_KEY"),
-	}))
+    }))
 
 	app.Post("/auth", AuthUser)
 	app.Post("/comAuth", AuthComp)

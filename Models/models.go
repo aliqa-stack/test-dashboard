@@ -6,11 +6,11 @@ import (
 )
 
 type Product struct {
-	ID bson.ObjectID `bson:"_id, omiempty" json:"id"`
+	ID bson.ObjectID `bson:"_id,omitempty" json:"id,omitempty"`
 	Barang string `json:"barang" bson:"barang"`
 	Brand string `json:"brand" bson:"brand"`
 	Harga int `json:"harga" bson:"harga"`
-	Deskripsi int `json:"deskripsi" bson:"deskripsi"`
+	Deskripsi string `json:"deskripsi" bson:"deskripsi"`
 }
 
 var ProductSection *mongo.Collection

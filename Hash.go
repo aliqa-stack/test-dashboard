@@ -23,7 +23,7 @@ func authHash(password, hash string) bool {
 func generateToken(length int) string {
 	bytes := make([]byte, length)
 	if _, err := rand.Read(bytes); err != nil {
-		log.Fatal("failed generate token %v", bytes)
+		log.Fatalf("failed generate token %v", bytes)
     }	
 	 return base64.URLEncoding.EncodeToString(bytes)
 }

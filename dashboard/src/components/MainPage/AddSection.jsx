@@ -1,4 +1,5 @@
 import React from 'react'
+import {useState , useEffect} from 'react'
 
 const AddSection = () => {
 
@@ -7,6 +8,33 @@ const AddSection = () => {
         {title : "Brand"},
         {title : "Harga"},
     ]
+
+    
+    const [products, setProducts] = useState([]);
+    useEffect(() => {
+        const Addproducts = async (event) => {
+            event.preventDefault();
+            try{
+                const uri = "http://localhost:3000/products"
+                const response = await fetch(uri, {
+                        method: "POST",
+                        headers:{
+                            'Content-type': 'application/json',
+                        },                    
+                })
+                if(!response.ok){
+                    throw new Error("failled adding product")
+                }
+
+                const data = await response.json()
+                setProducts((prevProducts) => [...prevProducts, data]);
+
+            }catch(error){
+                console.error("error add product", error)
+            }
+
+        }
+    }, []);
 
   return (
     <div>

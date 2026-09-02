@@ -9,6 +9,7 @@ import (
 	model "dashboard/Models"
 	"github.com/gofiber/fiber/v3"
 	"github.com/gofiber/fiber/v3/middleware/encryptcookie"
+	"github.com/gofiber/fiber/v3/middleware/cors"
 	"strings"
 	"go.mongodb.org/mongo-driver/v2/mongo"
 	"go.mongodb.org/mongo-driver/v2/bson"
@@ -53,6 +54,11 @@ func main(){
 	//fmt.Println(encryptcookie.GenerateKey(32))
 
 	//adding cookie 
+	app.Use(cors.New(cors.Config{
+		AllowOrigins : []string{"*"},
+		AllowHeaders : []string{"Origin, Content-Type, Accept"},
+		AllowMethods : []string{"GET, POST, DELETE"},
+	}))
     app.Use(encryptcookie.New(encryptcookie.Config{
 		Key: os.Getenv("COOKIE_KEY"),
     }))

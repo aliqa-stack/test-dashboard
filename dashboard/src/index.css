@@ -4,3 +4,13 @@
 @theme {
   --font-inter: "Inter", sans-serif;
 }
+
+@layer utilities{
+  .text-shadow-md {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  }
+  
+  .img-shadow {
+    filter : drop-shadow(40px 50px 25px rgba(0, 0, 0, 0.3));
+  }
+}

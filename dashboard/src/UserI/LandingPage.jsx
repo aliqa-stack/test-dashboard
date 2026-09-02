@@ -1,30 +1,39 @@
 import React from 'react'
+import shoes from '/public/shoes.png'
 
 const LandingPage = () => {
   return (
-   <div className="flex flex-wrap bg-gradient-to-br from-blue-500 from-10%  to-white to-50%">
-    <div className="w-full sm:w-8/12 mb-10 ">
-      <div className="container mx-auto h-full sm:p-10">
-        <nav className="flex px-4 justify-between items-center">
-          <div className="text-4xl font-bold">
-            Shop<span className="text-green-700">.</span>
+    <main className='md:px-12 md:py-6 bg-blue-400'>
+      <section className='relative min-h-[650px] bg-gradient-to-r from-blue-400 to-indigo-600
+      w-full md:rounded-xl shadow-md'>
+        <div className='flex justify-center items-center'>
+          {/*  nav section */}
+
+            {/*  hero section */}
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center min-h-[600px]'>
+              <div className='text-white mt-[100px] md:mt-0 p-4 space-y-4'>
+              <h1 className='text-3xl pl-6 md:pl-14'>1.Sport</h1>
+              <h1 className='text-5xl font-bold uppercase text-shadow-md font-inter'>Welcome</h1>
+              <p className='text-sm'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque expedita fuga praesentium illum accusamus sit, asperiores aperiam voluptatum ea nisi ipsum magni iure molestiae amet soluta? Corporis sapiente consequatur deleniti!</p>
+              <button className='border border-orange-400 px-4 py-2 rounded-e-lg'>Shop Now</button>
+              </div>
+              {/*  image section */}
+              <div>
+                <img src={shoes} alt="hero" className='relative z-10 w-[400px] img-shadow' />
+              </div>
+              {/*  blank section */}
+              <div className='md:hidden'></div>
           </div>
-          <div>
-            <img src="https://image.flaticon.com/icons/svg/497/497348.svg" alt="" className="w-8"/>
-          </div>
-        </nav>
-        <header className="container px-4 lg:flex mt-10 items-center h-full lg:mt-0">
-          <div className="w-full">
-            <h1 className="text-4xl lg:text-6xl font-bold font-serif italic">Temukan product <span className="text-orange-400 font-serif">favorit</span> disini</h1>
-            <div className="w-32 h-2 bg-orange-500 my-4"></div>
-            <p className="text-xl mb-10">Mulai cari dan beli product yang anda ingin kan dimulai dari sini</p>
-            <button className="bg-linear-to-r from-blue-500 to-indigo-600 text-white text-2xl font-medium px-4 py-2 rounded shadow">Learn More</button>
-          </div>
-        </header>
-      </div>
-    </div>
-    <img src="https://placehold.net/400x600.png" alt="Leafs" className="w-full h-48 object-cover sm:h-screen sm:w-4/12"/>
-  </div>
+        </div>        
+              {/*  blank section */}
+              <h1 className='text-center text-[80px] sm:text-[120px] md:text-[150px] xl:text-[180px] text-white uppercase font-bold absolute
+              bottom-0 lg:bottom-15 w-full z-0 text-shadow font-serif'>
+                AML
+              </h1>
+
+      </section> 
+    </main>
+  
   )
 }
 

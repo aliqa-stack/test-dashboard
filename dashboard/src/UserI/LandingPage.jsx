@@ -5,7 +5,7 @@ const LandingPage = () => {
   return (
     <main className='md:px-12 md:py-6 bg-blue-400'>
       <section className='relative min-h-[650px] bg-gradient-to-r from-blue-400 to-indigo-600
-      w-full md:rounded-xl shadow-md'>
+      w-full md:rounded-xl shadow-lg'>
         <div className='flex justify-center items-center'>
           {/*  nav section */}
 
@@ -15,7 +15,7 @@ const LandingPage = () => {
               <h1 className='text-3xl pl-6 md:pl-14'>1.Sport</h1>
               <h1 className='text-5xl font-bold uppercase text-shadow-md font-inter'>Welcome</h1>
               <p className='text-sm'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque expedita fuga praesentium illum accusamus sit, asperiores aperiam voluptatum ea nisi ipsum magni iure molestiae amet soluta? Corporis sapiente consequatur deleniti!</p>
-              <button className='border border-orange-400 px-4 py-2 rounded-e-lg'>Shop Now</button>
+              <button className='border-2 hover:bg-linear-to-r hover:from-orange-400 hover:to-orange-500 transition duration-300 shadow-md  border-orange-400 px-8 py-4 text-md font-bold font-inter rounded'>Shop Now</button>
               </div>
               {/*  image section */}
               <div>
@@ -27,7 +27,7 @@ const LandingPage = () => {
         </div>        
               {/*  blank section */}
               <h1 className='text-center text-[80px] sm:text-[120px] md:text-[150px] xl:text-[180px] text-white uppercase font-bold absolute
-              bottom-0 lg:bottom-15 w-full z-0 text-shadow font-serif'>
+              bottom-0 lg:bottom-15 w-full z-0 pointer-events-none text-shadow font-serif'>
                 AML
               </h1>
 

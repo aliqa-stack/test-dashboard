@@ -9,11 +9,7 @@ import IntroductionSection from './IntroductionSection'
 
 const Main = ({ canAccessDashboard, onGoToDashboard }) => {
   return (
-    <header className='min-h-screen bg-slate-100 p-8 '>
-        <div className='flex flex-col items-center my-4 p-8'>
-          <h1 className='text-6xl font-inter font-bold text-slate-800 '>Welcome</h1>
-          <p className='text-slate-600'>This is the user home page.</p>
-        </div>
+    <header className='min-h-screen bg-slate-100  '>
         <LandingPage/>
         <DividerSection2/>
         <InformPage/>

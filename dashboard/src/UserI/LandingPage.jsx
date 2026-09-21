@@ -3,7 +3,7 @@ import shoes from '/public/shoes.png'
 
 const LandingPage = () => {
   return (
-    <main className='md:px-12 md:py-6 bg-blue-400'>
+    <main className='md:px-12 md:py-6'>
       <section className='relative min-h-[650px] bg-gradient-to-r from-blue-400 to-indigo-600
       w-full md:rounded-xl shadow-lg'>
         <div className='flex justify-center items-center'>

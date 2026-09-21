@@ -4,8 +4,8 @@ import { MdFavorite } from "react-icons/md";
 
 const GridSection = () => {
   return (
-    <div className='flex justify-center p-4'>
-      <section className="grid w-full  max-w-5xl grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-8 lg:grid-rows-5">
+    <div className='flex justify-center p-4 bg-gray-300 m-8'>
+      <section className="grid w-full  max-w-5xl grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-8 lg:grid-rows-5 bg-gray-200 p-8 w-full h-full rounded-lg">
         <div className="sm:col-span-2 lg:col-span-2 lg:row-span-5">
           <div className='h-full min-h-68 w-full rounded-2xl bg-linear-to-br from-slate-900 to-slate-700 shadow-lg transition duration-500 ease-in-out hover:from-blue-600 hover:shadow-xl hover:shadow-slate-500'>
                 <div className='p-4 '>

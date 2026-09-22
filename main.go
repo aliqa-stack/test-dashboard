@@ -55,9 +55,10 @@ func main(){
 
 	//adding cookie 
 	app.Use(cors.New(cors.Config{
-		AllowOrigins : []string{"*"},
-		AllowHeaders : []string{"Origin, Content-Type, Accept"},
+		AllowOrigins : []string{"http://localhost:5173"},
+		AllowHeaders : []string{"Origin, Content-Type, Accept, Authorization"},
 		AllowMethods : []string{"GET, POST, DELETE"},
+		AllowCredentials : true,
 	}))
     app.Use(encryptcookie.New(encryptcookie.Config{
 		Key: os.Getenv("COOKIE_KEY"),

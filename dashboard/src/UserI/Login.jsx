@@ -2,14 +2,21 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import {  useNavigate } from 'react-router-dom';
 export default function LoginForm() {
-    const [form, setForm] = useState({Email: email, Username: username, Password: password})
+   // const [form, setForm] = useState({email: " ", username: " ", password: " "})
+    const [email, setEmail] = useState("")
+    const [username, setUsername] = useState("")
+    const [password, setPassword] = useState("")
+
     const [error, setError] = useState("")
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
-    const HandleChange = (e) => {
-        setForm((prev) => ({...prev, [e.target.name]: e.target.value}))
-    }
+   // const HandleChange = (e) => {
+        ////setForm((prev) => ({...prev, [e.target.name]: e.target.value}))
+        //setEmail(e.target.value)
+        //setUsername(e.target.value)
+        //setPassword(e.target.value)
+    //}
 
     const HandleForm = async (e) => {
         e.preventDefault()
@@ -23,17 +30,21 @@ export default function LoginForm() {
                 headers: {
                     "Content-Type" : "application/json"
                 },
-                credentials: "include",
-                body: JSON.stringify(form)
+                body: JSON.stringify({email,  username,  password}),
+                credentials: 'include'
             })
             const data = await res.json()
             if(!res.ok){
-                throw new Error(data.message || "login gagal")
+                throw new Error(data.error)
             }
-      
-            navigate("/")
+            
+            setEmail("")
+            setUsername("")
+            setPassword("")
+            //soon will be added
+            navigate("/loginPage")
         }catch(err){
-            setError(err.error)
+            setError(err.message)
         }finally{
         setLoading(false)
         }
@@ -56,19 +67,19 @@ export default function LoginForm() {
                     <div>
                     <label htmlFor="email"
                         className="mb-2 text-slate-900 font-medium text-sm inline-block">Email</label>
-                    <input type="email" id="email" name="email" value={form.email} onChange={HandleChange} placeholder="john@readymadeui.com" required
+                    <input type="email" id="email" name="email" value={email} onChange={(e) => {setEmail(e.target.value)}} placeholder="john@readymadeui.com" required
                         className="px-3 py-2.5 text-sm text-slate-900 rounded-md bg-white w-full outline-1 -outline-offset-1 outline-slate-300 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600" />
                     </div>
                     <div>
                     <label htmlFor="username"
                         className="mb-2 text-slate-900 font-medium text-sm inline-block">Username</label>
-                    <input type="text" value={form.username} onChange={HandleChange} id="username" name="username" placeholder="jane doe" required
+                    <input type="text" value={username} onChange={(e) => {setUsername(e.target.value)}} id="username" name="username" placeholder="jane doe" required
                         className="px-3 py-2.5 text-sm text-slate-900 rounded-md bg-white w-full outline-1 -outline-offset-1 outline-slate-300 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600" />
                     </div>
                     <div>
                     <label htmlFor="password"
                         className="mb-2 text-slate-900 font-medium text-sm inline-block">Password</label>
-                    <input type="password" id="password" name="password"value={form.password} onChange={HandleChange} placeholder="••••••••" required
+                    <input type="password" id="password" name="password"value={password} onChange={(e) => {setPassword(e.target.value)}} placeholder="••••••••" required
                         className="px-3 py-2.5 text-sm text-slate-900 rounded-md bg-white w-full outline-1 -outline-offset-1 outline-slate-300 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600" />
                     </div>
                     {error && <p className='text-red-500 text-md'>{error}</p>}

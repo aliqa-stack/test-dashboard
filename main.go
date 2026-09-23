@@ -84,7 +84,7 @@ func AuthUser(c fiber.Ctx) error {
 		return c.Status(400).JSON(fiber.Map{"error": "couldn't parse request body"})
 	}
 
-	if strings.TrimSpace(User.Email) == "" || strings.TrimSpace(User.Username) == "" || strings.TrimSpace(User.Password) == "" {
+	if strings.TrimSpace(User.Email) == " " || strings.TrimSpace(User.Username) == " " || strings.TrimSpace(User.Password) == " " {
 		return c.Status(400).JSON(fiber.Map{"error": "email, username, and password are required"})
 	} 
 

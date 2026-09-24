@@ -24,7 +24,7 @@ export default function LoginForm() {
         setError("")
 
         try{
-            const api = "http://localhost:3000/auth"
+            const api = "http://localhost:3000/comAuth"
             const res = await fetch(api, {
                 method: "POST",
                 headers: {
@@ -42,7 +42,7 @@ export default function LoginForm() {
             setUsername("")
             setPassword("")
             //soon will be added
-            navigate("/auth")
+            navigate("/")
         }catch(err){
             setError(err.message)
         }finally{
@@ -98,7 +98,7 @@ export default function LoginForm() {
                     className="w-full py-2 px-3.5 text-sm rounded-md font-semibold cursor-pointer tracking-wide text-white border border-blue-600 bg-blue-600 hover:bg-blue-700 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">
                     {loading ? 'signing..' : 'Sing up'}</button>
 
-                    <div className="text-slate-900 text-sm text-center" onClick={() => navigate=('/auth')}>Already Have account? <a 
+                    <div className="text-slate-900 text-sm text-center">Don't have an account? <a href="#"
                     className="text-blue-700 hover:underline ml-1 font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded">Sign
                     up</a>
                     </div>

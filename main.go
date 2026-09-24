@@ -121,7 +121,7 @@ func AuthComp(c fiber.Ctx) error{
 		return c.Status(400).JSON(fiber.Map{"erorr" : "user undentified"})
 	}
    
-	if strings.TrimSpace(User.Email) == "" || strings.TrimSpace(User.Username) == "" || strings.TrimSpace(User.Password) == "" {
+	if strings.TrimSpace(User.Email) == " " || strings.TrimSpace(User.Username) == " " || strings.TrimSpace(User.Password) == " " {
 		return c.Status(401).JSON(fiber.Map{"error" : "couldnt find the user", "data" : nil})
 	}
 

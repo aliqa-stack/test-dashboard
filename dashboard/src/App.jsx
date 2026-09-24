@@ -6,6 +6,7 @@ import DashBoard from './components/MainPage/DashBoard'
 import AddSection from './components/MainPage/AddSection'
 import Main from './UserI/Main'
 import LoginForm from './UserI/Login'
+import AuthForm from './UserI/LoginCom'
 
 const currentUser = {
   permissions: ['admin:dashboard'],
@@ -56,6 +57,9 @@ const App = () => {
         <Route 
         path='/login'
         element={<LoginForm/>}/>
+        <Route 
+        path='/auth'
+        element={<AuthForm/>}/>
         <Route
           path='/'
           element={<Main canAccessDashboard={hasAdminPermission} onGoToDashboard={() => navigate('/dashboard')} />}
